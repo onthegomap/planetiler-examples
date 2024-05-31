@@ -1,6 +1,6 @@
 # Planetiler example project
 
-Java 22 adds the ability to [run multi-file Java programs directly from .java files](https://openjdk.org/jeps/458) without a compile step or build tools. Vscode's [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) lets you edit Java files like this with a single jar file as a dependency. These make it easy to edit, run, and debug custom Java profiles for planetiler without complex setup or external tools.
+Java 22 [adds the ability](https://openjdk.org/jeps/458) to run multi-file programs directly from .java files without a compile step or build tools. Vscode's [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack) lets you edit Java files like this with a single jar file as a dependency. These make it easy to edit, run, and debug custom Java profiles for planetiler without complex setup or external tools.
 
 To get started:
 
@@ -14,7 +14,7 @@ Then run the profile:
 java -cp planetiler.jar Power.java --download
 ```
 
-And it should create `power.pmtiles` that you can inspect [here](https://protomaps.github.io/PMTiles/).
+And it should create a file `power.pmtiles` that you can inspect [here](https://protomaps.github.io/PMTiles/).
 
 ## IDE Setup
 
