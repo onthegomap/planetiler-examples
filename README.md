@@ -20,3 +20,7 @@ And it should create `power.pmtiles` that you can inspect [here](https://protoma
 
 1. Install [VSCode](https://code.visualstudio.com/download) and the [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 1. In VSCode, click `File -> Open` and navigate to Planetiler directory (If VSCode asks (and you trust the code) then click `Yes I trust the authors`)
+1. Open `Power.java`, it should automatically recognize this is a Java project and add `planetiler.jar` to the project classpath.
+1. Click `Run` button that shows up above the `public static void main(String[] args)` method.
+
+If VSCode can't find the Java 22 installation, open `Java: Configure Java Runtime` from the command pallete and point it to the installation.
