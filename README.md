@@ -8,6 +8,12 @@ To get started:
 
 1. Clone this repo
 1. Install Java 22 or later. You can download Java JDK (not JRE) manually from [Adoptium](https://adoptium.net) or use a [package manager](https://adoptium.net/installation/) or [platform installer](https://adoptium.net/installation/#_installers)
+   - **Linux get Java 22**
+     - Download JDK .tar.gz version 22 for your architecture from https://adoptium.net/temurin/releases/?version=22
+     - `tar -xzvf OpenJDK22U-jdk_x64_linux_hotspot_22.0.1_8.tar.gz`
+     - `sudo mv jdk-22.0.1+8 /usr/lib/jvm/`
+     - `sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-22.0.1+8/bin/java 1`
+     - `sudo update-alternatives --config java` and select openjdk-22
 1. Download latest planetiler release jar `wget https://github.com/onthegomap/planetiler/releases/download/v0.8.0-pre.1/planetiler.jar`
 
 Then run the profile:
