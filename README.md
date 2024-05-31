@@ -23,4 +23,6 @@ And it should create `power.pmtiles` that you can inspect [here](https://protoma
 1. Open `Power.java`, it should automatically recognize this is a Java project and add `planetiler.jar` to the project classpath.
 1. Click `Run` button that shows up above the `public static void main(String[] args)` method.
 
+<img width="702" alt="image" src="https://github.com/onthegomap/planetiler-example/assets/1480504/43f5a03d-54ed-4bf0-8ca2-89c50486b9a0">
+
 If VSCode can't find the Java 22 installation, open `Java: Configure Java Runtime` from the command pallete and point it to the installation.
