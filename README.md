@@ -5,7 +5,7 @@ Java 22 adds the ability to [run multi-file Java programs directly from .java fi
 To get started:
 
 1. Clone this repo
-1. Install Java 22 or later. You can download Java JDK (not JRE) manually from [Adoptium](https://adoptium.net) or with a [package manager](https://adoptium.net/installation/) or [platform installer](https://adoptium.net/installation/#_installers)
+1. Install Java 22 or later. You can download Java JDK (not JRE) manually from [Adoptium](https://adoptium.net) or use a [package manager](https://adoptium.net/installation/) or [platform installer](https://adoptium.net/installation/#_installers)
 1. Download latest planetiler release jar `wget https://github.com/onthegomap/planetiler/releases/download/v0.8.0-pre.1/planetiler.jar`
 
 Then run the profile:
