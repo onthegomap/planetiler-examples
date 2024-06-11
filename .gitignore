@@ -1,4 +1,8 @@
 *.jar
+*.parquet
 *.pmtiles
 *.pbf
+*.todo
 data/
+TODO
+.DS_Store

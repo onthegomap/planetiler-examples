@@ -1,0 +1,219 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/onthegomap/planetiler/main/planetiler-custommap/planetilerspec.schema.json
+
+# Tests cases for the overture profile that verify input features map to certain output vector tile features
+# To run them:
+# java -cp planetiler.jar Overture.java --tests overturelayers/tests.yml
+# optionally, you can add --watch to watch this file and rerun on any changes
+examples:
+  - name: buildings
+    input:
+      geometry: polygon
+      tags:
+        theme: buildings
+        type: building
+        height: 21.34
+        num_floors: 4
+        subtype: transportation
+        class: parking
+        has_parts: true
+    output:
+      layer: building
+      allow_extra_tags: false
+      min_zoom: 13
+      tags:
+        class: parking
+        height: 21.34
+        num_floors: 4
+        subtype: transportation
+        parts: has
+
+  - name: building part
+    input:
+      geometry: polygon
+      tags:
+        theme: buildings
+        type: building_part
+        height: 21.34
+        num_floors: 4
+        subtype: transportation
+        class: parking
+    output:
+      layer: building
+      allow_extra_tags: false
+      min_zoom: 14
+      tags:
+        class: parking
+        height: 21.34
+        num_floors: 4
+        subtype: transportation
+        parts: is
+
+  - name: river
+    input:
+      geometry: line
+      tags:
+        theme: base
+        type: water
+        subtype: river
+        class: river
+        is_salt: false
+        is_intermittent: false
+        names:
+          primary: Root River
+    output:
+      allow_extra_tags: false
+      layer: water
+      min_zoom: 9
+      tags:
+        class: river
+        is_intermittent: false
+        is_salt: false
+        subtype: river
+        name: Root River
+
+  - name: prominent river
+    input:
+      geometry: line
+      tags:
+        theme: base
+        type: water
+        subtype: river
+        class: river
+        names:
+          primary: Rio Sanatana
+        wikidata: Q7420045
+    output:
+      allow_extra_tags: false
+      min_zoom: 9
+      tags:
+        class: river
+        name: Rio Sanatana
+        subtype: river
+
+  - name: simple road with full length attributes
+    input:
+      geometry: line
+      tags:
+        theme": transportation
+        type: segment
+        subtype: road
+        class: residential
+        names:
+          primary: Nicola Street
+        road: |
+          {
+            "surface": [{ "value": "paved" }],
+            "flags": [{ "values": ["is_bridge"] }],
+            "restrictions": {
+              "access": [{"access_type":"denied","when":{"heading":"backward"}}],
+              "speed_limits": [
+                {"max_speed":{"value":30,"unit":"mph"}},
+                {"min_speed":{"value":10,"unit":"kph"},"when":{"recognized":["as_private"]}}
+              ]
+            },
+            "width": [{"value": 5.5}],
+            "lanes": [{ "value": [{ "direction": "backward" }, { "direction": "forward" }] }]
+          }
+    output:
+      allow_extra_tags: false
+      min_zoom: 14
+      tags:
+        class: residential
+        subtype: road
+        surface: paved
+        name: Nicola Street
+        is_bridge: true
+        max_speed: 30mph
+        min_speed: 10kph
+        min_speed_when: >-
+          {"recognized":["as_private"]}
+        access: denied
+        access_when: >-
+          {"heading":"backward"}
+        width: 5.5
+        lanes: >-
+          [{"direction":"backward"},{"direction":"forward"}]
+
+  - name: simple road with partial length attributes
+    input:
+      geometry: line
+      tags:
+        theme": transportation
+        type: segment
+        subtype: road
+        class: residential
+        names:
+          primary: Nicola Street
+        road: |
+          {
+            "surface": [{ "value": "paved", "between": [0, 0.5] }],
+            "flags": [{ "values": ["is_bridge"], "between": [0, 0.5] }],
+            "restrictions": {
+              "access":[{"access_type":"denied","when":{"heading":"backward"}, "between": [0, 0.5]}],
+              "speed_limits": [
+                {"max_speed":{"value":30,"unit":"mph"},"between":[0, 0.5]},
+                {"min_speed":{"value":10,"unit":"kph"},"when":{"recognized":["as_private"]},"between":[0, 0.5]}
+              ]
+            },
+            "width": [{"value": 5.5, "between": [0, 0.5]}],
+            "lanes": [{ "value": [{ "direction": "backward" }, { "direction": "forward" }], "between": [0, 0.5] }]
+          }
+    output:
+      - allow_extra_tags: false
+        min_zoom: 14
+        tags:
+          class: residential
+          subtype: road
+          surface: paved
+          is_bridge: true
+          name: Nicola Street
+          max_speed: 30mph
+          min_speed: 10kph
+          min_speed_when: >-
+            {"recognized":["as_private"]}
+          access: denied
+          access_when: >-
+            {"heading":"backward"}
+          width: 5.5
+          lanes: >-
+            [{"direction":"backward"},{"direction":"forward"}]
+      - allow_extra_tags: false
+        min_zoom: 14
+        tags:
+          class: residential
+          subtype: road
+          name: Nicola Street
+
+  - name: simple road with partial name
+    input:
+      geometry: line
+      tags:
+        theme": transportation
+        type: segment
+        subtype: road
+        class: residential
+        names:
+          primary: Full Name
+          common:
+            es: Full Name ES
+          rules:
+            - variant: common
+              value: Partial Name
+              between: [0, 0.5]
+            - variant: common
+              language: "es"
+              value: Partial Name ES
+              between: [0, 0.5]
+    output:
+      - allow_extra_tags: false
+        tags:
+          name: Full Name
+          name:es: Full Name ES
+          class: residential
+          subtype: road
+      - allow_extra_tags: false
+        tags:
+          name: Partial Name
+          name:es: Partial Name ES
+          class: residential
+          subtype: road

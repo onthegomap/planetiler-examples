@@ -19,10 +19,10 @@ To get started:
 Then run the profile:
 
 ```bash
-java -cp planetiler.jar Power.java --download
+java -cp planetiler.jar Power.java
 ```
 
-It should create a file `power.pmtiles` showing powerlines in Rhode Island that you can inspect with https://protomaps.github.io/PMTiles/.
+It should create a file `power.pmtiles` showing powerlines in Rhode Island that you can inspect with https://pmtiles.io
 
 ## IDE Setup
 
