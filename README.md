@@ -51,8 +51,3 @@ NOTE: You will still need to download the JDK to edit with vscode.
 - Read through the other example profiles in this repo to learn what you can do with planetiler
 
 You should be able to start a simple profile in one file, split out into multiple files as complexity grows, and only introduce a build tool if you need to manage external dependencies. `planetiler.jar` already contains the most popular dependencies you are likely to need like [Google guava](https://github.com/google/guava), [JTS](https://github.com/locationtech/jts), readers for openstreetmap, shapefiles, geopackage, and geoparquet and writers for mbtiles and pmtiles archives.
-
-TODO:
-
-- add more OSM examples
-- add overture example
