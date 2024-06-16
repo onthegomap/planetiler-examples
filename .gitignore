@@ -2,7 +2,7 @@
 *.parquet
 *.pmtiles
 *.pbf
-*.todo
+*todo*
 data/
 TODO
 .DS_Store

@@ -20,6 +20,17 @@ import com.onthegomap.planetiler.reader.Struct;
  */
 public class Transportation extends BaseLayer implements LayerPostProcesser {
 
+  /*
+   * road.restrictions.speed_limits speed_limits
+   * road.restrictions.access access_restrictions
+   * road.restrictions.prohibited_transitions prohibited_transitions
+   * road.surface road_surface
+   * road.flags road_flags
+   * road.width width_rules
+   * road.lanes lanes
+   * road.level level_rules
+   */
+
   private PlanetilerConfig config;
 
   public Transportation(PlanetilerConfig config) {
@@ -64,13 +75,11 @@ public class Transportation extends BaseLayer implements LayerPostProcesser {
       }
     }
 
-    var road = sourceFeature.getStruct("road");
-
-    for (var surface : road.get("surface").asList()) {
+    for (var surface : sourceFeature.getStruct("road_surface").asList()) {
       feature.linearRange(range(surface)).setAttrWithMinzoom("surface", surface.get("value").asString(), 12);
     }
 
-    for (var flags : road.get("flags").asList()) {
+    for (var flags : sourceFeature.getStruct("road_flags").asList()) {
       var range = feature.linearRange(range(flags));
       for (var value : flags.get("values").asList()) {
         var str = value.asString();
@@ -81,25 +90,33 @@ public class Transportation extends BaseLayer implements LayerPostProcesser {
       }
     }
 
-    for (var level : road.get("level").asList()) {
+    for (var level : sourceFeature.getStruct("level_rules").asList()) {
       feature.linearRange(range(level)).setAttrWithMinSize("level", level.get("value").asInt(), 4, 9, 12);
     }
 
-    for (var width : road.get("width").asList()) {
+    for (var width : sourceFeature.getStruct("width_rules").asList()) {
       feature.linearRange(range(width)).setAttrWithMinzoom("width", width.get("value").asDouble(), 12);
     }
 
-    for (var lanes : road.get("lanes").asList()) {
+    for (var lanes : sourceFeature.getStruct("lanes").asList()) {
       var value = lanes.get("value").asJson();
-      if (!"null".equals(value))
+      if (!"null".equals(value)) {
         feature.linearRange(range(lanes)).setAttrWithMinzoom("lanes", value, 12);
+      }
     }
 
-    for (var speedLimits : road.get("restrictions.speed_limits").asList()) {
-      var range = feature.linearRange(range(speedLimits));
-      var min = speedLimits.get("min_speed");
-      var max = speedLimits.get("max_speed");
-      var when = speedLimits.get("when");
+    for (var level : sourceFeature.getStruct("level_rules").asList()) {
+      var value = level.get("value").asInt();
+      if (value != null) {
+        feature.linearRange(range(level)).setAttrWithMinzoom("level", value, 12);
+      }
+    }
+
+    for (var limit : sourceFeature.getStruct("speed_limits").asList()) {
+      var range = feature.linearRange(range(limit));
+      var min = limit.get("min_speed");
+      var max = limit.get("max_speed");
+      var when = limit.get("when");
       var whenString = when.isNull() ? null : when.asJson();
       if (!min.isNull()) {
         range.setAttrWithMinzoom("min_speed", min.get("value").asString() + min.get("unit").asString(), 12);
@@ -111,7 +128,7 @@ public class Transportation extends BaseLayer implements LayerPostProcesser {
       }
     }
 
-    for (var access : road.get("restrictions.access").asList()) {
+    for (var access : sourceFeature.getStruct("access_restrictions").asList()) {
       var range = feature.linearRange(range(access));
       var type = access.get("access_type");
       var when = access.get("when");

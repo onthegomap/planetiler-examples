@@ -94,26 +94,38 @@ examples:
     input:
       geometry: line
       tags:
-        theme": transportation
+        theme: transportation
         type: segment
         subtype: road
         class: residential
         names:
           primary: Nicola Street
-        road: |
-          {
-            "surface": [{ "value": "paved" }],
-            "flags": [{ "values": ["is_bridge"] }],
-            "restrictions": {
-              "access": [{"access_type":"denied","when":{"heading":"backward"}}],
-              "speed_limits": [
-                {"max_speed":{"value":30,"unit":"mph"}},
-                {"min_speed":{"value":10,"unit":"kph"},"when":{"recognized":["as_private"]}}
-              ]
-            },
-            "width": [{"value": 5.5}],
-            "lanes": [{ "value": [{ "direction": "backward" }, { "direction": "forward" }] }]
-          }
+        speed_limits:
+          - max_speed:
+              value: 30
+              unit: mph
+          - min_speed:
+              value: 10
+              unit: kph
+            when:
+              recognized: ["as_private"]
+        road_surface:
+          - value: paved
+        access_restrictions:
+          - access_type: "denied"
+            when:
+              heading: backward
+        width_rules:
+          - value: 5.5
+        level_rules:
+          - value: 1
+        road_flags:
+          - values:
+              - is_bridge
+        lanes:
+          - value:
+              - direction: backward
+              - direction: forward
     output:
       allow_extra_tags: false
       min_zoom: 14
@@ -133,31 +145,51 @@ examples:
         width: 5.5
         lanes: >-
           [{"direction":"backward"},{"direction":"forward"}]
+        level: 1
 
   - name: simple road with partial length attributes
     input:
       geometry: line
       tags:
-        theme": transportation
+        theme: transportation
         type: segment
         subtype: road
         class: residential
         names:
           primary: Nicola Street
-        road: |
-          {
-            "surface": [{ "value": "paved", "between": [0, 0.5] }],
-            "flags": [{ "values": ["is_bridge"], "between": [0, 0.5] }],
-            "restrictions": {
-              "access":[{"access_type":"denied","when":{"heading":"backward"}, "between": [0, 0.5]}],
-              "speed_limits": [
-                {"max_speed":{"value":30,"unit":"mph"},"between":[0, 0.5]},
-                {"min_speed":{"value":10,"unit":"kph"},"when":{"recognized":["as_private"]},"between":[0, 0.5]}
-              ]
-            },
-            "width": [{"value": 5.5, "between": [0, 0.5]}],
-            "lanes": [{ "value": [{ "direction": "backward" }, { "direction": "forward" }], "between": [0, 0.5] }]
-          }
+        speed_limits:
+          - max_speed:
+              value: 30
+              unit: mph
+            between: [0, 0.5]
+          - min_speed:
+              value: 10
+              unit: kph
+            when:
+              recognized: ["as_private"]
+            between: [0, 0.5]
+        access_restrictions:
+          - access_type: "denied"
+            when:
+              heading: backward
+            between: [0, 0.5]
+        width_rules:
+          - value: 5.5
+            between: [0, 0.5]
+        level_rules:
+          - value: 1
+            between: [0, 0.5]
+        road_surface:
+          - value: paved
+            between: [0, 0.5]
+        road_flags:
+          - values: [is_bridge]
+            between: [0, 0.5]
+        lanes:
+          - value:
+              - direction: backward
+              - direction: forward
+            between: [0, 0.5]
     output:
       - allow_extra_tags: false
         min_zoom: 14
@@ -177,6 +209,7 @@ examples:
           width: 5.5
           lanes: >-
             [{"direction":"backward"},{"direction":"forward"}]
+          level: 1
       - allow_extra_tags: false
         min_zoom: 14
         tags:
@@ -188,7 +221,7 @@ examples:
     input:
       geometry: line
       tags:
-        theme": transportation
+        theme: transportation
         type: segment
         subtype: road
         class: residential

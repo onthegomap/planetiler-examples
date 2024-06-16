@@ -1,11 +1,8 @@
 import java.nio.file.Path;
-import java.util.Objects;
-
 import com.onthegomap.planetiler.ForwardingProfile;
 import com.onthegomap.planetiler.Planetiler;
 import com.onthegomap.planetiler.config.Arguments;
 import com.onthegomap.planetiler.config.PlanetilerConfig;
-import com.onthegomap.planetiler.util.DuplicateClassLoader;
 import com.onthegomap.planetiler.util.Glob;
 
 import overturelayers.Building;
