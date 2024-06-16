@@ -7,14 +7,22 @@ Until recently you needed to set up a build tool like [maven](https://maven.apac
 To get started:
 
 1. Clone this repo
-1. Install Java 22 or later. You can download Java JDK (not JRE) manually from [Adoptium](https://adoptium.net) or use a [package manager](https://adoptium.net/installation/) or [platform installer](https://adoptium.net/installation/#_installers)
-   - **Linux get Java 22**
-     - Download JDK .tar.gz version 22 for your architecture from https://adoptium.net/temurin/releases/?version=22
-     - `tar -xzvf OpenJDK22U-jdk_x64_linux_hotspot_22.0.1_8.tar.gz`
-     - `sudo mv jdk-22.0.1+8 /usr/lib/jvm/`
-     - `sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-22.0.1+8/bin/java 1`
-     - `sudo update-alternatives --config java` and select openjdk-22
-1. Download latest planetiler release jar `wget https://github.com/onthegomap/planetiler/releases/download/v0.8.0-pre.1/planetiler.jar`
+2. Install Java 22 or later. You can download the Java JDK (not JRE) using a package installer for windows or mac from https://adoptium.net/temurin/releases/?version=22 or get the tar.gz/zip file and add the enclosed `bin/java` file to your path
+   <details>
+   <summary>Linux Instructions</summary>
+
+   Download JDK .tar.gz version 22 for your architecture from https://adoptium.net/temurin/releases/?version=22 then:
+
+   ```bash
+   tar -xzvf OpenJDK22U-jdk_x64_linux_hotspot_22.0.1_8.tar.gz
+   sudo mv jdk-22.0.1+8 /usr/lib/jvm/
+   sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-22.0.1+8/bin/java 1
+   sudo update-alternatives --config java # and select openjdk-22
+   ```
+
+   </details>
+
+3. Download latest planetiler release jar `wget https://github.com/onthegomap/planetiler/releases/latest/download/planetiler.jar`
 
 Then run the profile:
 
@@ -49,6 +57,6 @@ NOTE: You will still need to download the JDK to edit with vscode.
 - Learn Java basics: https://www.baeldung.com/java-tutorial ([chatgpt](https://chat.openai.com/) is also useful when getting started)
 - Learn more about working with Java in vscode: https://code.visualstudio.com/docs/java/java-tutorial
 - Read through the other example profiles in this repo to learn what you can do with planetiler
-- Add example yaml test cases for a profile (for example [`overturelayers/test.yml`](./overturelayers/tests.yml)) to ensure your profile maps input source features to expected output vector tile features.
+- Add example yaml test cases for a profile like [`overturelayers/test.yml`](./overturelayers/tests.yml) to ensure your profile maps input source features to expected output vector tile features.
 
 You should be able to start a simple profile in one file, split out into multiple files as complexity grows, and only introduce a build tool if you need to manage external dependencies. `planetiler.jar` already contains the most popular dependencies you are likely to need like [Google guava](https://github.com/google/guava), [JTS](https://github.com/locationtech/jts), readers for openstreetmap, shapefiles, geopackage, and geoparquet and writers for mbtiles and pmtiles archives.
