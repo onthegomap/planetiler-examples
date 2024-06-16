@@ -49,5 +49,6 @@ NOTE: You will still need to download the JDK to edit with vscode.
 - Learn Java basics: https://www.baeldung.com/java-tutorial ([chatgpt](https://chat.openai.com/) is also useful when getting started)
 - Learn more about working with Java in vscode: https://code.visualstudio.com/docs/java/java-tutorial
 - Read through the other example profiles in this repo to learn what you can do with planetiler
+- Add example yaml test cases for a profile (for example [`overturelayers/test.yml`](./overturelayers/tests.yml)) to ensure your profile maps input source features to expected output vector tile features.
 
 You should be able to start a simple profile in one file, split out into multiple files as complexity grows, and only introduce a build tool if you need to manage external dependencies. `planetiler.jar` already contains the most popular dependencies you are likely to need like [Google guava](https://github.com/google/guava), [JTS](https://github.com/locationtech/jts), readers for openstreetmap, shapefiles, geopackage, and geoparquet and writers for mbtiles and pmtiles archives.
