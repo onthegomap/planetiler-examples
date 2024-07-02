@@ -22,7 +22,11 @@ To get started:
 
    </details>
 
-3. Download latest planetiler release jar `wget https://github.com/onthegomap/planetiler/releases/latest/download/planetiler.jar`
+3. Download latest planetiler release jar:
+
+```bash
+wget https://github.com/onthegomap/planetiler/releases/latest/download/planetiler.jar
+```
 
 Then run the profile:
 
