@@ -8,7 +8,7 @@ import com.onthegomap.planetiler.config.Arguments;
 import com.onthegomap.planetiler.reader.SourceFeature;
 
 /**
- * A single-file profile that generates vector tiles from Overture Land Cover
+ * A single-file profile that generates vector tiles from Overture Maps Land Cover
  * data (https://docs.overturemaps.org/schema/reference/base/land_cover/)
  * 
  * To run:
