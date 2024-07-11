@@ -8,14 +8,14 @@ import com.onthegomap.planetiler.config.Arguments;
 import com.onthegomap.planetiler.reader.SourceFeature;
 
 /**
- * A single-file profile that generates vector tiles from Overture Maps building
- * data (https://docs.overturemaps.org/schema/reference/buildings/building/)
+ * A single-file profile that generates vector tiles from Overture Maps Land Cover
+ * data (https://docs.overturemaps.org/schema/reference/base/land_cover/)
  * 
  * To run:
- * - download just overture building data in a bounding box to
- * data/buildings.parquet (https://docs.overturemaps.org/getting-data/)
+ * - download just overture land cover data in a bounding box to
+ * data/land_cover.parquet (https://docs.overturemaps.org/getting-data/)
  * - Run java -cp planetiler.jar OvertureLandcover.java
- * - Open data/overture-buildings.pmtiles in https://pmtiles.io/
+ * - Open data/overture-land_cover.pmtiles in https://pmtiles.io/
  */
 public class OvertureLandcover implements Profile {
   public static void main(String[] args) {
