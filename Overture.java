@@ -6,6 +6,7 @@ import com.onthegomap.planetiler.config.PlanetilerConfig;
 import com.onthegomap.planetiler.util.Glob;
 
 import overturelayers.Building;
+import overturelayers.LandCover;
 import overturelayers.Transportation;
 import overturelayers.Water;
 
@@ -25,6 +26,7 @@ public class Overture extends ForwardingProfile {
   Overture(PlanetilerConfig config) {
     super(config);
     registerHandler(new Water(config));
+    registerHandler(new LandCover(config));
     registerHandler(new Transportation(config));
     registerHandler(new Building());
   }
